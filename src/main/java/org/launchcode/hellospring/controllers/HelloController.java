@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@ResponseBody // can add at top of class if each method uses this annotation
 public class HelloController {
 
     // handles request at path /hello
@@ -18,14 +19,12 @@ public class HelloController {
 //    }
 
     @GetMapping("goodbye")
-    @ResponseBody
     public String goodbye() {
         return "Goodbye, Springy!";
     }
 
     // Handler that handles requests of the form /hello?name=LaunchCode
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value = "hello")
-    @ResponseBody
     public String helloWithQueryParam(@RequestParam String name) {
         return "Hello, " + name + "!";
 
@@ -33,7 +32,6 @@ public class HelloController {
 
     // Handler handles requests of the form /hello/LaunchCode
     @GetMapping("hello/{name}")
-    @ResponseBody
     public String helloWithPathParam(@PathVariable String name) {
         return "Hello, " + name + "!!";
 
